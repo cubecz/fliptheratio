@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flip the Ratio</title>
+<meta name="description" content="Design has become the bottleneck because development is so much faster now. So flip the designer-to-engineer ratio: 1:20 → 20:1.">
+<meta property="og:title" content="Flip the Ratio">
+<meta property="og:description" content="Design has become the bottleneck because development is so much faster now. So flip the designer-to-engineer ratio: 1:20 → 20:1.">
+<meta property="og:url" content="https://fliptheratio.com">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23171717'/%3E%3Ctext x='50' y='68' font-size='52' font-family='monospace' fill='%23fff' text-anchor='middle'%3E%E2%87%84%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #171717;
+    --muted: #6f6f6f;
+    --faint: #a8a8a8;
+    --border: #ebebeb;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  main {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 0 24px 48px;
+  }
+  ::selection { background: var(--fg); color: var(--bg); }
+
+  /* ---- hero / ascii ---- */
+  .hero {
+    padding: clamp(56px, 12vh, 128px) 0 clamp(40px, 7vh, 72px);
+    text-align: center;
+  }
+  #ascii {
+    font-family: var(--mono);
+    font-size: clamp(9px, 2.6vw, 16px);
+    line-height: 1.25;
+    letter-spacing: 0;
+    white-space: pre;
+    display: inline-block;
+    text-align: left;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    color: var(--fg);
+  }
+  .caption {
+    margin-top: 28px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+  .caption .hint { color: var(--faint); }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px;
+    clip: rect(0 0 0 0); overflow: hidden; white-space: nowrap;
+  }
+
+  /* ---- prose ---- */
+  h1 {
+    font-size: clamp(28px, 5.4vw, 36px);
+    font-weight: 650;
+    letter-spacing: -0.022em;
+    line-height: 1.15;
+    margin-bottom: 28px;
+  }
+  .prose p { margin-bottom: 22px; color: var(--fg); }
+  .prose p.dim { color: var(--muted); }
+  .prose em { font-style: italic; }
+  a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--faint);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.15s ease;
+  }
+  a:hover { text-decoration-color: var(--fg); }
+
+  .question {
+    margin: 44px 0;
+    padding: 28px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .question p.q {
+    font-size: clamp(20px, 4vw, 24px);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  .question p.a { color: var(--muted); margin-bottom: 0; }
+
+  footer {
+    padding-top: 8px;
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  footer .ratio { font-family: var(--mono); color: var(--faint); }
+
+  /* ---- entrance ---- */
+  .fade {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: rise 0.8s cubic-bezier(0.21, 0.47, 0.32, 0.98) forwards;
+  }
+  .fade.d1 { animation-delay: 0.05s; }
+  .fade.d2 { animation-delay: 0.15s; }
+  .fade.d3 { animation-delay: 0.25s; }
+  .fade.d4 { animation-delay: 0.35s; }
+  @keyframes rise {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fade { animation: none; opacity: 1; transform: none; }
+    #ascii { cursor: default; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header class="hero fade d1">
+    <div id="ascii" aria-hidden="true" title="Flip it"></div>
+    <span class="sr-only">The ratio of designers to engineers, flipping from 1:20 to 20:1.</span>
+    <div class="caption">designers : engineers <span class="hint">· tap to flip</span></div>
+  </header>
+
+  <h1 class="fade d2">Flip the ratio.</h1>
+
+  <section class="prose fade d3">
+    <p>For as long as digital products have existed, one designer has worked
+    with five, ten, twenty engineers. Nobody questioned it &mdash; building software
+    was the slow, expensive part, so that&rsquo;s where the people went.</p>
+
+    <p>AI flipped the economics. Code that used to take a quarter now takes
+    days, and every product organization is saying the same thing:
+    <em>design has become the bottleneck, because development is so much faster
+    now.</em> The constraint moved. The ratio didn&rsquo;t.</p>
+
+    <p>So here&rsquo;s a simple solution: flip it. Twenty designers for every
+    engineer. Problem solved. You&rsquo;re welcome. Let me know how the budget
+    approval goes.</p>
+
+    <p>Except it has stopped being a joke. At <a href="https://www.2fresh.cz" target="_blank" rel="noopener">2FRESH</a>,
+    we are now working on a project where the design budget is double the
+    engineering budget &mdash; a first in our history, and something unheard of in
+    the digital product industry. When making things is cheap, deciding what
+    to make &mdash; and making it good &mdash; is where the value goes.</p>
+  </section>
+
+  <section class="question fade d4">
+    <p class="q">Should the design budget be bigger?</p>
+    <p class="a">Have you seen the ratio flip on your projects?
+    <a href="https://www.linkedin.com/in/jakubkarlec/" target="_blank" rel="noopener">Join the conversation&nbsp;&#8599;</a></p>
+  </section>
+
+  <footer class="fade d4">
+    <span>A thesis by <a href="https://www.linkedin.com/in/jakubkarlec/" target="_blank" rel="noopener">Jakub Karlec</a> &middot; <a href="https://www.2fresh.cz" target="_blank" rel="noopener">2FRESH</a></span>
+    <span class="ratio">1:20 &rarr; 20:1</span>
+  </footer>
+</main>
+
+<script>
+(function () {
+  var el = document.getElementById('ascii');
+
+  // 5x7 pixel glyphs (colon is 3 wide)
+  var GLYPHS = {
+    '0': ['.###.','#...#','#..##','#.#.#','##..#','#...#','.###.'],
+    '1': ['..#..','.##..','..#..','..#..','..#..','..#..','.###.'],
+    '2': ['.###.','#...#','....#','...#.','..#..','.#...','#####'],
+    ':': ['...','...','.#.','...','.#.','...','...']
+  };
+  var ROWS = 7;
+
+  function grid(str) {
+    var rows = [];
+    for (var r = 0; r < ROWS; r++) {
+      var line = '';
+      for (var i = 0; i < str.length; i++) {
+        line += GLYPHS[str[i]][r];
+        if (i < str.length - 1) line += '.';
+      }
+      rows.push(line);
+    }
+    return rows.map(function (line) {
+      return line.split('').map(function (c) { return c === '#'; });
+    });
+  }
+
+  var A = grid('1:20');
+  var B = grid('20:1');
+  var COLS = A[0].length;
+  var POOL = '░▒▓█▀▄'; // ░ ▒ ▓ █ ▀ ▄
+
+  function renderStatic(g) {
+    var out = '';
+    for (var r = 0; r < ROWS; r++) {
+      for (var c = 0; c < COLS; c++) out += g[r][c] ? '██' : '  ';
+      if (r < ROWS - 1) out += '\n';
+    }
+    el.textContent = out;
+  }
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (reduced.matches) {
+    renderStatic(B);
+    return;
+  }
+
+  // Per-cell morph schedule: a left-to-right wave with jitter.
+  var cells = [];
+  function schedule(dir) {
+    cells = [];
+    for (var r = 0; r < ROWS; r++) {
+      for (var c = 0; c < COLS; c++) {
+        var col = dir > 0 ? c : COLS - 1 - c;
+        var from = (dir > 0 ? A : B)[r][c];
+        var to = (dir > 0 ? B : A)[r][c];
+        cells.push({
+          r: r, c: c, from: from, to: to,
+          delay: col * 30 + Math.random() * 220,
+          dur: 300 + Math.random() * 320,
+          // let some empty cells flicker as dust
+          dust: (!from && !to && Math.random() < 0.12)
+        });
+      }
+    }
+  }
+
+  var MORPH = 1300, HOLD_A = 2600, HOLD_B = 4200;
+  var phase = 'holdA';   // holdA -> toB -> holdB -> toA -> holdA
+  var phaseStart = performance.now();
+  var lastTick = -1;
+  var scrambleChars = {};
+
+  function renderMorph(t) {
+    var tick = Math.floor(t / 55);
+    var refresh = tick !== lastTick;
+    lastTick = tick;
+    var out = '';
+    var idx = 0, r, c;
+    for (r = 0; r < ROWS; r++) {
+      for (c = 0; c < COLS; c++) {
+        var cell = cells[idx++];
+        var ch;
+        if (t < cell.delay) {
+          ch = cell.from ? '█' : ' ';
+        } else if (t < cell.delay + cell.dur) {
+          if (cell.from || cell.to || cell.dust) {
+            if (refresh || !scrambleChars[idx]) {
+              scrambleChars[idx] = POOL[Math.floor(Math.random() * POOL.length)];
+            }
+            ch = scrambleChars[idx];
+          } else {
+            ch = ' ';
+          }
+        } else {
+          ch = cell.to ? '█' : ' ';
+        }
+        out += ch + ch;
+      }
+      if (r < ROWS - 1) out += '\n';
+    }
+    el.textContent = out;
+  }
+
+  function morphDone(t) {
+    for (var i = 0; i < cells.length; i++) {
+      if (t < cells[i].delay + cells[i].dur) return false;
+    }
+    return true;
+  }
+
+  function frame(now) {
+    var t = now - phaseStart;
+    if (phase === 'holdA' && t >= HOLD_A) {
+      phase = 'toB'; phaseStart = now; schedule(1); scrambleChars = {};
+    } else if (phase === 'holdB' && t >= HOLD_B) {
+      phase = 'toA'; phaseStart = now; schedule(-1); scrambleChars = {};
+    } else if (phase === 'toB') {
+      renderMorph(t);
+      if (t > MORPH && morphDone(t)) { phase = 'holdB'; phaseStart = now; renderStatic(B); }
+    } else if (phase === 'toA') {
+      renderMorph(t);
+      if (t > MORPH && morphDone(t)) { phase = 'holdA'; phaseStart = now; renderStatic(A); }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  el.addEventListener('click', function () {
+    var now = performance.now();
+    if (phase === 'holdA') { phase = 'toB'; phaseStart = now; schedule(1); scrambleChars = {}; }
+    else if (phase === 'holdB') { phase = 'toA'; phaseStart = now; schedule(-1); scrambleChars = {}; }
+  });
+
+  renderStatic(A);
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
